@@ -1,0 +1,39 @@
+- name: Installing nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: latest
+
+- name: start and enable the nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: delete the html directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html # /usr/share/nginx/html/* is not working to delete the default content of html so html delete the directory and recreate the html directory
+    state: absent
+    
+- name: Create the html Directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: download and extract the code
+  ansible.builtin.unarchive:
+    src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+# if there is change in configuration only, then you need to restart the nginx
+- name: copy the backend conf
+  ansible.builtin.template:
+    src: expense.conf.j2
+    dest: /etc/nginx/default.d/expense.conf
+  notify:
+  - restart nginx
+
+# - name:  Restart the nginx
+#   ansible.builtin.service:
+#     name: nginx 
+#     state: restarted
