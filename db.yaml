@@ -3,3 +3,6 @@
   become: yes
   roles:
   - db
+
+  mysql_root_password: ExpenseApp@1
+  login_host: db.shravan.cloud
