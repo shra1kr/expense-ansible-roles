@@ -16,7 +16,7 @@
   ansible.builtin.user:
     name: expense    
 
-- name: run app-pre-requisites
+- name: run app pre requisites
   ansible.builtin.import_role:
     name: common
     task_path: app-pre-req.yaml # .yaml is not mandatory
