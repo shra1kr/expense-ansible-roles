@@ -19,8 +19,8 @@
 - name: run app-pre-requisites
   ansible.builtin.import_role:
     name: common
-    task_path: app-pre-req # .yaml is not mandatory
-    
+    task_path: app-pre-req.yaml # .yaml is not mandatory
+
 - name: install nodejs dependencie i.e, npm install
   ansible.builtin.command: npm install
   args:
