@@ -9,21 +9,10 @@
     state: started
     enabled: yes
 
-- name: delete the html directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html # /usr/share/nginx/html/* is not working to delete the default content of html so html delete the directory and recreate the html directory
-    state: absent
-    
-- name: Create the html Directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory
-
-- name: download and extract the code
-  ansible.builtin.unarchive:
-    src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-    dest: /usr/share/nginx/html
-    remote_src: yes
+- name: run app-pre-requisites
+  ansible.builtin.import_role:
+    name: common
+    task_path: app-pre-req # .yaml is not mandatory
 
 # if there is change in configuration only, then you need to restart the nginx
 - name: copy the backend conf
