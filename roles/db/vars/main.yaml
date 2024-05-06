@@ -1,3 +1,4 @@
 mysql_root_password: ExpenseApp@1
 login_host: db.shravan.cloud
 login_user: root
+component: db
