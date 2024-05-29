@@ -1,6 +1,6 @@
 login_user: root
 login_host: db.shravan.cloud
-login_password: ExpenseApp@1
+login_password: ExpenseApp1
 DB_HOST: db.shravan.cloud
 app_location: /app
 component: backend
